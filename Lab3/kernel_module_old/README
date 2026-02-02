@@ -1,0 +1,29 @@
+*** Make sure `pwd` does not contain any space ***
+
+To compile:
+ sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -C /lib/modules/$(uname -r)/build M=$(pwd) modules
+
+If the above compilation does not work, run the following commands:
+ su root
+ cd /usr/lib/modules/$(uname -r)/build
+ make oldconfig && make prepare
+ cd -
+ su xilinx
+
+And re-run the compile command.
+
+
+To clean:
+ make -C /lib/modules/$(uname -r)/build M=$(pwd) clean
+
+To insert module onto cpu0:
+ insmod CPUcntr.ko
+ insmod CPUcntr.ko
+
+To remove module:
+ rmmod CPUcntr.ko
+ rmmod CPUcntr.ko
+
+To check module:
+ dmesg | tail -1
+
